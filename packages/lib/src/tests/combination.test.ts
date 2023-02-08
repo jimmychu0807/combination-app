@@ -45,4 +45,16 @@ describe('Combination', () => {
     //   Ref: https://stackoverflow.com/questions/30176093/chaijs-expect-constructor-to-throw-error
     expect(() => new Combination(5, 6)).to.throw(Error);
   });
+
+  it('can iterate over a custom set of elements', () => {
+    const com: Combination<string> = new Combination(['a', 'b', 'c', 'd', 'e'], 3);
+    const expectedTotal = Combination.choose(5, 3);
+    // Check the first and last elements
+    let cnt = 0;
+    for (const set of com) {
+      if (cnt === 0) expect(set).to.eql(new Set(['a', 'b', 'c']));
+      if (cnt === expectedTotal - 1) expect(set).to.eql(new Set(['c', 'd', 'e']));
+      cnt += 1;
+    }
+  });
 });
