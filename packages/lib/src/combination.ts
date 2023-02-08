@@ -4,25 +4,38 @@ class Combination<T> implements Iterable<Set<T | number>> {
   readonly data: T[] | number[];
 
   constructor(n: number, k: number, data?: T[]) {
-    if (n <= 0 || k <= 0) throw new Error("n and k must be positive integer.");
-    if (k > n) throw new Error("n must be greater than or equal to k.");
+    if (n <= 0 || k <= 0) throw new Error('n and k must be positive integer.');
+    if (k > n) throw new Error('n must be greater than or equal to k.');
     if (Array.isArray(data) && data.length !== n) {
-      throw new Error("`data` should have the same number of entries as `n`.");
+      throw new Error('`data` should have the same number of entries as `n`.');
     }
 
     this.n = n;
     this.k = k;
-    this.data = data ? data : Array(n).fill(0).map((_, idx) => idx);
+    this.data = data
+      ? data
+      : Array(n)
+          .fill(0)
+          .map((_, idx) => idx);
   }
 
   static choose(n: number, k: number): number {
-    throw new Error("Unimplemented");
-    return 0;
+    if (n <= 0 || k <= 0) throw new Error('n and k must be positive integer.');
+    if (k > n) return 0;
+
+    const iter = Math.min(k, n - k);
+    let result = 1;
+    // Note that choose(7,3) = (7 * 6 * 5) / (1 * 2 * 3)
+    for (let i = 0; i < iter; i++) {
+      result *= (n - i) / (i + 1);
+    }
+
+    return result;
   }
 
   element(nth: number): T | number {
-    throw new Error("Unimplemented");
-    return this.data[0];
+    throw new Error('Unimplemented');
+    return this.data[nth];
   }
 
   [Symbol.iterator]() {
@@ -36,8 +49,8 @@ class Combination<T> implements Iterable<Set<T | number>> {
         }
 
         return { value: undefined, done: true };
-      }
-    }
+      },
+    };
   }
 }
 
