@@ -47,7 +47,7 @@ describe('Combination', () => {
   });
 
   it('can iterate over a custom set of elements', () => {
-    const com: Combination<string> = new Combination(['a', 'b', 'c', 'd', 'e'], 3);
+    const com = new Combination(['a', 'b', 'c', 'd', 'e'], 3);
     const expectedTotal = Combination.choose(5, 3);
     // Check the first and last elements
     let cnt = 0;
