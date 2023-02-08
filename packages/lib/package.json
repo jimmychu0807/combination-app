@@ -7,7 +7,7 @@
   "files": [
     "dist/**"
   ],
-  "repository": "https://github.com/jimmychu0807/typescript-minimal-starter.git",
+  "repository": "https://github.com/jimmychu0807/combination-app.git",
   "author": "Jimmy Chu <jimmychu0807@gmail.com>",
   "license": "MIT",
   "type": "module",

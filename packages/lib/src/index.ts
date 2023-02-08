@@ -1,2 +1,5 @@
-const message = 'Hello world from @workspace/lib';
-console.log(message);
+import { Combination } from './combination.js';
+
+export {
+  Combination
+};
