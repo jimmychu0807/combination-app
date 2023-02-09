@@ -53,11 +53,12 @@ class Combination<T> implements Iterable<Set<DataT<T>>> {
       const subsetSize = this.k - i;
       for (let digit = lastUsedDigit; digit > 0; digit--) {
         const res = Combination.choose(digit, subsetSize);
-        if (res > remain) continue;
-        combinadic[i] = digit;
-        lastUsedDigit = digit;
-        remain -= res;
-        break;
+        if (res <= remain) {
+          combinadic[i] = digit;
+          lastUsedDigit = digit;
+          remain -= res;
+          break;
+        }
       }
     }
 
