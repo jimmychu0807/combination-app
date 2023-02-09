@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { Combination } from '../index.js';
 
 describe('Combination', () => {
-  it('static function `Combination.choose()` works', () => {
+  it('`Combination.choose()` works', () => {
     expect(Combination.choose(10, 5)).to.eq(252);
     expect(Combination.choose(7, 4)).to.eq(35);
     expect(Combination.choose(7, 7)).to.eq(1);
@@ -55,6 +55,17 @@ describe('Combination', () => {
       if (cnt === 0) expect(set).to.eql(new Set(['a', 'b', 'c']));
       if (cnt === expectedTotal - 1) expect(set).to.eql(new Set(['c', 'd', 'e']));
       cnt += 1;
+    }
+  });
+
+  it('element() function works', () => {
+    // Here we assume combination iteration pass its tests
+    const com = new Combination(10, 5);
+
+    let nth = 0;
+    for (const set of com) {
+      expect(set).to.eql(com.element(nth));
+      nth += 1;
     }
   });
 });
