@@ -1,12 +1,7 @@
 {
-  "name": "@workspace/my-app",
+  "name": "@workspace/main-app",
   "version": "1.0.0",
-  "description": "@workspace/my-app",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**"
-  ],
+  "description": "@workspace/main-app",
   "repository": "https://github.com/jimmychu0807/typescript-minimal-starter.git",
   "author": "Jimmy Chu <jimmychu0807@gmail.com>",
   "license": "MIT",
@@ -21,24 +16,27 @@
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier --write .",
     "fix": "yarn fix:eslint && yarn fix:prettier",
-    "build": "tsc -b .",
-    "test": "NODE_OPTIONS='--loader ts-node/esm' mocha -r ts-node/register 'src/tests/**/*.ts'",
-    "dev": "ts-node src/index.ts",
-    "start": "yarn build && node ../../dist/apps/my-app/index.js",
-    "clean": "rimraf ../../dist/apps/my-app"
+    "build": "tsc && vite build",
+    "start": "vite",
+    "preview": "vite preview",
+    "clean": "rimraf ../../dist/apps/main-app"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.4",
-    "@types/mocha": "^10.0.1",
     "@types/node": "^17.0.21",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
-    "chai": "^4.3.7",
+    "@vitejs/plugin-react-swc": "^3.0.0",
     "eslint": "^8.33.0",
-    "mocha": "^10.2.0",
     "prettier": "^2.5.1",
     "rimraf": "^4.1.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0"
   }
 }
