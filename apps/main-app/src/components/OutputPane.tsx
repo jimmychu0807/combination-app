@@ -17,7 +17,7 @@ export default function OutputPane(props: OutputPaneProps) {
             COPY
           </Button>
           <FormControl>
-            <Textarea rows={25} height="auto" placeholder="Result output" value={output} />
+            <Textarea isReadOnly={true} rows={25} height="auto" placeholder="Result output" value={output} />
           </FormControl>
         </Flex>
         <Button variant="outline">Clear result</Button>

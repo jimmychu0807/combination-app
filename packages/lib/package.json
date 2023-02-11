@@ -24,8 +24,8 @@
     "build": "tsc -b .",
     "test": "NODE_OPTIONS='--loader ts-node/esm' mocha -r ts-node/register 'src/tests/**/*.ts'",
     "dev": "ts-node src/index.ts",
-    "start": "yarn build && node ../../dist/packages/lib/index.js",
-    "clean": "rimraf ../../dist/packages/lib"
+    "start": "yarn build && node dist/index.js",
+    "clean": "rimraf dist"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",

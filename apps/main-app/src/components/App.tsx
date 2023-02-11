@@ -1,5 +1,6 @@
 import { Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
+import { Combination } from '@workspace/lib';
 
 import Readme from './Readme';
 import InputPane from './InputPane';
@@ -24,7 +25,7 @@ function App() {
   const compute: Compute = {
     computeTotal: (n: number, k: number) => {
       console.log(`n: ${n}, k: ${k}`);
-      setOutput((10).toString());
+      setOutput(Combination.choose(n, k).toString());
     },
   };
 

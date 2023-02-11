@@ -19,12 +19,13 @@
     "build": "tsc && vite build",
     "start": "vite",
     "preview": "vite preview",
-    "clean": "rimraf ../../dist/apps/main-app"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@workspace/lib": "*",
     "framer-motion": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
