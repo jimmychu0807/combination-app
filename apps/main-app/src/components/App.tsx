@@ -16,6 +16,8 @@ export interface InputParams {
 
 export interface Compute {
   computeTotal: (n: number, k: number) => void;
+  generateCombination: (items: number | string[], k: number) => void;
+  getLexElement: (items: number | string[], k: number, lOrder: number) => void;
 }
 
 function App() {
@@ -24,8 +26,25 @@ function App() {
 
   const compute: Compute = {
     computeTotal: (n: number, k: number) => {
-      console.log(`n: ${n}, k: ${k}`);
       setOutput(Combination.choose(n, k).toString());
+    },
+
+    generateCombination: (items: number | string[], k: number) => {
+      const com = Array.isArray(items)
+        ? new Combination<string>(items, k)
+        : new Combination<number>(items, k);
+      const result = Array.from(com);
+      const resultStr = result.map((el) => Array.from(el.values()).toString()).join('\n');
+      setOutput(resultStr);
+    },
+
+    getLexElement: (items: number | string[], k: number, lOrder: number) => {
+      const com = Array.isArray(items)
+        ? new Combination<string>(items, k)
+        : new Combination<number>(items, k);
+      const result = com.element(lOrder);
+      const resultStr = Array.from(result.values()).toString();
+      setOutput(resultStr);
     },
   };
 
@@ -42,7 +61,7 @@ function App() {
           <form>
             <SimpleGrid columns={2} spacing={8}>
               <InputPane input={input} setInput={setInput} compute={compute} />
-              <OutputPane output={output} />
+              <OutputPane output={output} setOutput={setOutput} />
             </SimpleGrid>
           </form>
         </VStack>

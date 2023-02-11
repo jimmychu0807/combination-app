@@ -69,6 +69,18 @@ export default function InputPane(props: InputPaneProps) {
     compute.computeTotal(itemNum, k);
   }
 
+  function handleGenerateCombination() {
+    const inputItems: number | string[] =
+      use === 'itemNumber' ? n : items.split('\n').map((v) => v.trim());
+    compute.generateCombination(inputItems, k);
+  }
+
+  function handleGetLexElement() {
+    const inputItems: number | string[] =
+      use === 'itemNumber' ? n : items.split('\n').map((v) => v.trim());
+    compute.getLexElement(inputItems, k, lOrder);
+  }
+
   return (
     <>
       <Stack direction="column" spacing={4}>
@@ -120,14 +132,10 @@ export default function InputPane(props: InputPaneProps) {
         >
           <Stack direction="column">
             <Button onClick={handleComputeTotal}>Compute total combinations</Button>
-            <Button>Generate all combinations</Button>
+            <Button onClick={handleGenerateCombination}>Generate all combinations</Button>
             <Spacer my={4} h={12} />
-            <NumberFieldControl
-              value={lOrder}
-              label="Element lexicographical order:"
-              setValue={setLOrder}
-            />
-            <Button>Get element</Button>
+            <NumberFieldControl value={lOrder} label="Element Entry:" setValue={setLOrder} />
+            <Button onClick={handleGetLexElement}>Get element</Button>
           </Stack>
         </ButtonGroup>
       </Stack>
