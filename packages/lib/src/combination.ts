@@ -42,7 +42,8 @@ class Combination<T> implements Iterable<Set<DataT<T>>> {
     const dataLen = this.data.length;
     const comTotal = Combination.choose(dataLen, this.k);
 
-    if (nth < 0 || nth >= comTotal) throw new Error(`\`nth\` must be between 0 and ${comTotal - 1}, getting ${nth}.`);
+    if (nth < 0 || nth >= comTotal)
+      throw new Error(`\`nth\` must be between 0 and ${comTotal - 1}, getting ${nth}.`);
 
     // Referred as `dual` in the article mentioned above.
     let remain = comTotal - nth - 1;
