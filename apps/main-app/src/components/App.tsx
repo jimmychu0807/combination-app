@@ -1,4 +1,4 @@
-import { Flex, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react';
 
 import Readme from './Readme';
 import InputPane from './InputPane';
@@ -9,18 +9,20 @@ function App() {
   return (
     <>
       <Flex direction="column">
-        <Heading as="h1" size="lg">
-          Combination App
-        </Heading>
+        <VStack spacing={5}>
+          <Heading as="h1" size="lg">
+            Combination App
+          </Heading>
 
-        <Readme />
+          <Readme />
 
-        <form>
-          <SimpleGrid columns={2} spacing={5}>
-            <InputPane />
-            <OutputPane />
-          </SimpleGrid>
-        </form>
+          <form>
+            <SimpleGrid columns={2} spacing={8}>
+              <InputPane />
+              <OutputPane />
+            </SimpleGrid>
+          </form>
+        </VStack>
       </Flex>
     </>
   );
