@@ -6,7 +6,6 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Highlight,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -20,30 +19,30 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
-import { useState, Dispatch } from 'react';
+import { Dispatch } from 'react';
 import type { InputParams, Compute } from './App';
 
 interface NumberFieldControlProps {
   label?: string;
   value: number;
-  setValue: Dispatch<number>;
+  onChange: Dispatch<number>;
 }
 
 interface InputPaneProps {
   input: InputParams;
   setInput: Dispatch<InputParams>;
-  compute: Compute;
+  model: Compute;
 }
 
-type ItemChoice = 'itemNumber' | 'items';
+type ComputeType = 'computeTotal' | 'generateCombination' | 'getElement';
 
 function NumberFieldControl(props: NumberFieldControlProps) {
-  const { label, value, setValue } = props;
+  const { label, value, onChange } = props;
   return (
     <>
       <FormControl>
         {label && <FormLabel>{label}</FormLabel>}
-        <NumberInput defaultValue={value} onChange={(_, vn) => setValue(vn)}>
+        <NumberInput defaultValue={value.toString()} onChange={(_, vn) => onChange(vn)}>
           <NumberInputField value={value} />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -56,29 +55,25 @@ function NumberFieldControl(props: NumberFieldControlProps) {
 }
 
 export default function InputPane(props: InputPaneProps) {
-  const { compute } = props;
+  const { model, input, setInput } = props;
 
-  const [n, setN] = useState<number>(5);
-  const [items, setItems] = useState<string>('');
-  const [use, setUse] = useState<ItemChoice>('itemNumber');
-  const [k, setK] = useState<number>(3);
-  const [lOrder, setLOrder] = useState<number>(0);
-
-  function handleComputeTotal() {
-    const itemNum = use === 'itemNumber' ? n : items.split('\n').length;
-    compute.computeTotal(itemNum, k);
+  function updateInput(obj: { [key: string]: string | number | string[] }) {
+    setInput({ ...input, ...obj });
   }
 
-  function handleGenerateCombination() {
-    const inputItems: number | string[] =
-      use === 'itemNumber' ? n : items.split('\n').map((v) => v.trim());
-    compute.generateCombination(inputItems, k);
-  }
+  function compute(computeType: ComputeType) {
+    const itemNum = input.use === 'itemNumber' ? input.itemNum : input.items.length;
 
-  function handleGetLexElement() {
-    const inputItems: number | string[] =
-      use === 'itemNumber' ? n : items.split('\n').map((v) => v.trim());
-    compute.getLexElement(inputItems, k, lOrder);
+    if (computeType === 'computeTotal') {
+      model.computeTotal(itemNum, input.k);
+    } else {
+      const items = input.use === 'itemNumber' ? input.itemNum : input.items;
+      if (computeType === 'generateCombination') {
+        model.generateCombination(items, input.k);
+      } else {
+        model.getLexElement(items, input.k, input.lOrder);
+      }
+    }
   }
 
   return (
@@ -88,17 +83,16 @@ export default function InputPane(props: InputPaneProps) {
           Input
         </Heading>
 
-        <RadioGroup defaultValue={use} onChange={(v) => setUse(v as ItemChoice)}>
+        <RadioGroup defaultValue={input.use} onChange={(v) => updateInput({ use: v })}>
           <FormLabel>Items:</FormLabel>
           <Radio w="100%" value="itemNumber" my={1}>
-            Item Number (aka.{' '}
-            <Highlight query="n" styles={{ px: '2', py: '1', rounded: '20%', bg: 'teal.100' }}>
-              n
-            </Highlight>
-            ):
+            Item number (aka. `n`):
           </Radio>
           <Box ml={6}>
-            <NumberFieldControl value={n} setValue={setN} />
+            <NumberFieldControl
+              value={input.itemNum}
+              onChange={(v) => updateInput({ itemNum: v })}
+            />
           </Box>
           <Text my={2}>or</Text>
           <Radio w="100%" value="items">
@@ -109,15 +103,20 @@ export default function InputPane(props: InputPaneProps) {
               <Textarea
                 rows={5}
                 height="auto"
-                value={items}
+                value={input.items}
                 placeholder="Items, one per line"
-                onChange={(ev) => setItems(ev.target.value)}
+                onChange={(ev) => updateInput({ items: ev.target.value.split('\n') })}
+                size="sm"
               />
             </FormControl>
           </Box>
         </RadioGroup>
 
-        <NumberFieldControl value={k} label="# of item chosen (aka. `k`):" setValue={setK} />
+        <NumberFieldControl
+          value={input.k}
+          label="# of item chosen (aka. `k`):"
+          onChange={(k) => updateInput({ k })}
+        />
 
         <Divider />
 
@@ -130,12 +129,18 @@ export default function InputPane(props: InputPaneProps) {
           borderRadius="md"
           p={4}
         >
-          <Stack direction="column">
-            <Button onClick={handleComputeTotal}>Compute total combinations</Button>
-            <Button onClick={handleGenerateCombination}>Generate all combinations</Button>
+          <Stack direction="column" w="100%">
+            <Button onClick={() => compute('computeTotal')}>Compute total combinations</Button>
+            <Button onClick={() => compute('generateCombination')}>
+              Generate all combinations
+            </Button>
             <Spacer my={4} h={12} />
-            <NumberFieldControl value={lOrder} label="Element Entry:" setValue={setLOrder} />
-            <Button onClick={handleGetLexElement}>Get element</Button>
+            <NumberFieldControl
+              value={input.lOrder}
+              label="Element entry:"
+              onChange={(lOrder) => updateInput({ lOrder })}
+            />
+            <Button onClick={() => compute('getElement')}>Get element</Button>
           </Stack>
         </ButtonGroup>
       </Stack>
