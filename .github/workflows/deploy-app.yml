@@ -1,12 +1,15 @@
 name: Build & Deploy App
 on:
-  push:
+  workflow_run:
+    workflows: ["Yarn Check"]
+    types: ["completed"]
     branches: [main]
 
 jobs:
   build-deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -23,7 +26,7 @@ jobs:
         yarn build
 
         # navigate into the build output directory
-        cd dist
+        cd apps/main-app/dist
 
         # place .nojekyll to bypass Jekyll processing
         echo > .nojekyll
