@@ -2,7 +2,7 @@ import { Card, CardBody, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import ReactMarkdown from 'react-markdown';
 
-import styles from './Readme.module.scss';
+import styles from './App.module.scss';
 
 const content = `
 Combination generation is a math concept. Given an \`n\` and \`k\`, how many combinations of \`k\` can be picked from \`n\` elements, irrespective of the order (i.e. [\`1\`, \`2\`, \`3\`] is regarded the same as [\`3\`, \`1\`, \`2\`]), also what are the actual combination sets?

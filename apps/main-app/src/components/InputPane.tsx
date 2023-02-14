@@ -22,6 +22,7 @@ import {
 import { Dispatch } from 'react';
 import type { InputParams } from './App';
 import type { Model } from '../model';
+import styles from './App.module.scss';
 
 interface NumberFieldControlProps {
   label?: string;
@@ -79,8 +80,8 @@ export default function InputPane(props: InputPaneProps) {
 
   return (
     <>
-      <Stack direction="column" spacing={4}>
-        <Heading as="h3" size="lg">
+      <Stack direction="column" spacing={4} w="100%">
+        <Heading as="h3" size="lg" className={styles.centeredText}>
           Input
         </Heading>
 
