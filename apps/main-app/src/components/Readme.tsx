@@ -1,4 +1,4 @@
-import { Card, CardBody, Flex, Link } from '@chakra-ui/react';
+import { Card, CardBody, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import ReactMarkdown from 'react-markdown';
 
@@ -14,7 +14,7 @@ As an example, with n = 5, and k = 3, the number of combinations is **10**, and 
 function Readme() {
   return (
     <Card>
-      <CardBody className={ styles.topCard }>
+      <CardBody className={styles.topCard}>
         <ReactMarkdown>{content}</ReactMarkdown>
         <Link href="https://github.com/jimmychu0807/combination-app" isExternal>
           Source code and more can be read here
