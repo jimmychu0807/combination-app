@@ -13,6 +13,7 @@
     "clean": "turbo clean",
     "test": "turbo test",
     "start": "yarn build && yarn workspace @workspace/main-app start",
+    "full-check": "yarn build && yarn check && yarn test",
     "preview": "yarn build && yarn workspace @workspace/main-app preview",
     "changeset-create": "changeset",
     "changeset-apply": "changeset version",
