@@ -104,7 +104,7 @@ export default function InputPane(props: InputPaneProps) {
               <Textarea
                 rows={5}
                 height="auto"
-                value={input.items}
+                value={input.items.join('\n')}
                 placeholder="Items, one per line"
                 onChange={(ev) => updateInput({ items: ev.target.value.split('\n') })}
                 size="sm"

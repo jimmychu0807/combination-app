@@ -17,7 +17,7 @@ function Readme() {
       <CardBody className={ styles.topCard }>
         <ReactMarkdown>{content}</ReactMarkdown>
         <Link href="https://github.com/jimmychu0807/combination-app" isExternal>
-          Source Code
+          Source code and more can be read here
           <ExternalLinkIcon mx="2px" />
         </Link>
       </CardBody>
