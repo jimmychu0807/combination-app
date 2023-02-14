@@ -20,7 +20,8 @@ import {
 } from '@chakra-ui/react';
 
 import { Dispatch } from 'react';
-import type { InputParams, Compute } from './App';
+import type { InputParams } from './App';
+import type { Model } from '../model';
 
 interface NumberFieldControlProps {
   label?: string;
@@ -31,7 +32,7 @@ interface NumberFieldControlProps {
 interface InputPaneProps {
   input: InputParams;
   setInput: Dispatch<InputParams>;
-  model: Compute;
+  model: Model;
 }
 
 type ComputeType = 'computeTotal' | 'generateCombination' | 'getElement';

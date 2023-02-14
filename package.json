@@ -12,8 +12,8 @@
     "fix": "turbo fix",
     "clean": "turbo clean",
     "test": "turbo test",
-    "full-pipeline": "turbo build check test",
     "start": "yarn build && yarn workspace @workspace/main-app start",
+    "preview": "yarn build && yarn workspace @workspace/main-app preview",
     "changeset-create": "changeset",
     "changeset-apply": "changeset version",
     "release": "turbo run build && changeset publish"
