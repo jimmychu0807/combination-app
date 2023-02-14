@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import styles from './OutputPane.module.scss';
+import styles from './App.module.scss';
 
 interface OutputPaneProps {
   output: string;
@@ -39,8 +39,8 @@ export default function OutputPane(props: OutputPaneProps) {
 
   return (
     <>
-      <Stack direction="column" spacing={4}>
-        <Heading as="h3" size="lg">
+      <Stack direction="column" spacing={4} w="100%">
+        <Heading as="h3" size="lg" className={styles.centeredText}>
           Result
         </Heading>
         {errMsg.length > 0 && (

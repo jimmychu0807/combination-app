@@ -1,4 +1,4 @@
-import { Heading, Stack } from '@chakra-ui/react';
+import { Heading, Stack, Container } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import Readme from './Readme';
@@ -6,6 +6,7 @@ import InputPane from './InputPane';
 import OutputPane from './OutputPane';
 import { model } from '../model';
 import './App.css';
+import styles from './App.module.scss';
 
 export type ItemChoice = 'itemNumber' | 'items';
 
@@ -30,16 +31,16 @@ function App() {
   const compute = model(setOutput, setErrMsg);
 
   return (
-    <>
+    <Container maxW="800px" centerContent>
       <Stack direction="column" spacing={5}>
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="lg" className={styles.centeredText}>
           Combination App
         </Heading>
 
         <Readme />
 
         <form>
-          <Stack direction="row" gap={8}>
+          <Stack direction="row" gap={8} w="100%">
             <InputPane input={input} setInput={setInput} model={compute} />
             <OutputPane
               output={output}
@@ -50,7 +51,7 @@ function App() {
           </Stack>
         </form>
       </Stack>
-    </>
+    </Container>
   );
 }
 
