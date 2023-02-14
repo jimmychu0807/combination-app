@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
-      deployments: write
-      pages: write
+      contents: write
     steps:
     - uses: actions/checkout@v3
       with:
