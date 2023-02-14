@@ -1,0 +1,35 @@
+name: Build & Deploy App
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        lfs: true
+        submodules: 'recursive'
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: lts/hydrogen
+
+    - name: ${{ matrix.step }}
+      run: |
+        yarn install --immutable | grep -v 'YN0013'
+        yarn build
+
+        # navigate into the build output directory
+        cd dist
+
+        # place .nojekyll to bypass Jekyll processing
+        echo > .nojekyll
+
+        git init
+        git checkout -B main
+        git add -A
+        git commit -m 'deploy'
+        git push -f git@github.com:jimmychu0807/combination-app.git main:gh-pages
