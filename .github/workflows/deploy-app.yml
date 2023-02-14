@@ -20,19 +20,25 @@ jobs:
       with:
         node-version: lts/hydrogen
 
-    - name: ${{ matrix.step }}
+    - name: Build
       run: |
         yarn install --immutable | grep -v 'YN0013'
         yarn build
 
+    - name: Deploy App
+      use: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./apps/main-app/dist
+
         # navigate into the build output directory
-        cd apps/main-app/dist
+        # cd apps/main-app/dist
 
         # place .nojekyll to bypass Jekyll processing
-        echo > .nojekyll
+        # echo > .nojekyll
 
-        git init
-        git checkout -B main
-        git add -A
-        git commit -m 'deploy'
-        git push -f git@github.com:jimmychu0807/combination-app.git main:gh-pages
+        # git init
+        # git checkout -B main
+        # git add -A
+        # git commit -m 'deploy'
+        # git push -f git@github.com:jimmychu0807/combination-app.git main:gh-pages
